@@ -1,9 +1,25 @@
 <div
   class="container mx-auto flex justify-center items-center flex-col"
 >
-  <div class="rounded border-black border p-1 m-1 flex justify-center items-center flex-col w-1/2">
-    <img ngSrc="{{product.image}}" [alt]="product.title" class="mb-2" width="100" height="50"/>
+  <div class="rounded border-black border p-3 m-1 flex justify-center items-center w-1/2 flex-col">
+    <img [src]="product.image" [alt]="product.title" class="mb-2" style="height: 100px"/>
     <h2>{{ product.title }}</h2>
-    <p>Price: <span class="font-bold">{{ product.price | currency: "RUB" }}</span></p>
+    <p>Price: <span class="font-bold">{{ product.price | currency: "$" }}</span></p>
+
+    <button
+      [ngClass]="{
+        'bg-yellow-400': !details,
+        'bg-blue-400': details
+      }"
+      class="border py-2 px-4 rounded bg-yellow-400"
+      (click)="details = !details"
+    >
+      {{ details ? "Hide" : "Show"}} Details
+    </button>
+
+    <div *ngIf="details" class="mt-1 w-full">
+      <p>{{ product.description }}</p>
+      <p>Rate: <span [ngStyle]="{fontWeight: 'bold'}">{{ product.rating.rate | number: "1.2-4" }}</span></p>
+    </div>
   </div>
 </div>

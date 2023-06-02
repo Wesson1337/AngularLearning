@@ -10,12 +10,14 @@ import {ProductsService} from "./services/products.service";
 export class AppComponent implements OnInit {
   title = 'AngularLearning';
   products: IProduct[] = []
+  loading = true
 
   constructor(private productsService: ProductsService) {
   }
   ngOnInit(): void {
     this.productsService.getAll().subscribe(products => {
       this.products = products
+      this.loading = false
     })
   }
 }
